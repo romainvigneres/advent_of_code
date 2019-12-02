@@ -79,4 +79,4 @@ def get_result():
     test_one()
     print("Part one", part_one(inp))
     test_two()
-    print("Part one", part_two(inp))
+    print("Part two", part_two(inp))
