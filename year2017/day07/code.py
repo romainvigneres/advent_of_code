@@ -43,13 +43,63 @@ def test_one():
     ]
     assert part_one(input_test) == "tknk"
 
+def get_data(list_input, name):
+    for x in list_input:
+        if x[0] == name:
+            return x
+
+class disc:
+    def __init__(self, n, w, dep):
+        self.name = n
+        self.weight = int(w)
+        self.dependencies = dep
+    def total_weight(self):
+        if self.dependencies is None:
+            return self.weight
+        return self.weight + sum([x.total_weight() for x in self.dependencies])
+    def balanced(self):
+        if self.dependencies is None:
+            return True
+        if len(set([x.total_weight() for x in self.dependencies])) == 1:
+            return True
+        return False
+
+def add_to_dict(dic_obj, name, weight, dependencies, cl):
+    if name in dic_obj:
+        return dic_obj[name]
+    if dependencies is None:
+            new_obj = disc(name, weight, None)
+    else:
+        lst_dep = []
+        for x in dependencies:
+            if x in dic_obj:
+                lst_dep.append(dic_obj[x])
+            else:
+                n, w, d = get_data(cl, x)
+                lst_dep.append(add_to_dict(dic_obj, n, w, d, cl))
+        new_obj = disc(name, weight, lst_dep)
+    dic_obj[name] = new_obj
+    return new_obj
+
+
+
 def part_two(list_str):
-    new_weight = 0
-    bottom_list = []
-    dep_list = []
+    obj_dict = dict()
     clean_input = [clean_line(x) for x in list_str]
-    # TODO start from the top of the towers
-    return new_weight
+    for name, weight, dependencies in clean_input:
+        if name in obj_dict:
+            continue
+        add_to_dict(obj_dict, name, weight, dependencies, clean_input)
+    lst_unbalanced = [v for k, v in obj_dict.items() if not v.balanced()]
+    for tower in lst_unbalanced:
+        lst_weight = [x.total_weight() for x in tower.dependencies]
+        for dis in tower.dependencies:
+            if lst_weight.count(dis.total_weight()) == 1:
+                faulty = dis
+            else:
+                normal_weight = dis.total_weight()
+        diff = normal_weight - faulty.total_weight()
+        return faulty.weight + diff
 
 def test_two():
     input_test = [
