@@ -1,5 +1,6 @@
 from common import input_list_string
 
+
 def part_one(lst_str):
     instructions = [x.split() for x in lst_str]
     register_dict = dict()
@@ -16,6 +17,7 @@ def part_one(lst_str):
                 register_dict[reg] -= int(val)
     return max([v for k, v in register_dict.items()])
 
+
 def test_one():
     test_input = [
         "b inc 5 if a > 1",
@@ -24,6 +26,7 @@ def test_one():
         "c inc -20 if c == 10",
     ]
     assert part_one(test_input) == 1
+
 
 def part_two(lst_str):
     instructions = [x.split() for x in lst_str]
@@ -44,6 +47,7 @@ def part_two(lst_str):
                 max_val = register_dict[reg]
     return max_val
 
+
 def test_two():
     test_input = [
         "b inc 5 if a > 1",
@@ -52,6 +56,7 @@ def test_two():
         "c inc -20 if c == 10",
     ]
     assert part_two(test_input) == 10
+
 
 def get_result():
     inp = input_list_string("year2017/day08/input.txt")
