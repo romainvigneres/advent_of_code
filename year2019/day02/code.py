@@ -25,7 +25,7 @@ def test_one():
 
 
 def get_result():
-    inp = input_list_string("year2019/day02/input.txt")
+    inp = input_list_string("2019", "02")
     program = [int(x) for x in inp[0].split(",")]
     program2 = program.copy()
     # part one

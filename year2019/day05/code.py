@@ -71,6 +71,6 @@ def intcode_computer(program_inp, input_set):
 
 
 def get_result():
-    inp = input_list_string("year2019/day05/input.txt")[0]
+    inp = input_list_string("2019", "05")[0]
     print("Part one", intcode_computer(inp, 1))
     print("Part two", intcode_computer(inp, 5))

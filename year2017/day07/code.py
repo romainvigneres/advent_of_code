@@ -1,5 +1,6 @@
 from common import input_list_string
 
+
 def clean_line(line):
     line = line.replace(" (", ";").replace(")", "").replace(" -> ", ";")
     line_lst = line.split(";")
@@ -25,7 +26,11 @@ def part_one(list_str):
 
 def test_one():
     assert clean_line("pbga (66)") == ["pbga", "66", None]
-    assert clean_line("fwft (72) -> ktlj, cntj, xhth") == ["fwft", "72", ["ktlj", "cntj", "xhth"]]
+    assert clean_line("fwft (72) -> ktlj, cntj, xhth") == [
+        "fwft",
+        "72",
+        ["ktlj", "cntj", "xhth"],
+    ]
     input_test = [
         "pbga (66)",
         "xhth (57)",
@@ -39,24 +44,28 @@ def test_one():
         "jptl (61)",
         "ugml (68) -> gyxo, ebii, jptl",
         "gyxo (61)",
-        "cntj (57)"
+        "cntj (57)",
     ]
     assert part_one(input_test) == "tknk"
+
 
 def get_data(list_input, name):
     for x in list_input:
         if x[0] == name:
             return x
 
+
 class disc:
     def __init__(self, n, w, dep):
         self.name = n
         self.weight = int(w)
         self.dependencies = dep
+
     def total_weight(self):
         if self.dependencies is None:
             return self.weight
         return self.weight + sum([x.total_weight() for x in self.dependencies])
+
     def balanced(self):
         if self.dependencies is None:
             return True
@@ -64,11 +73,12 @@ class disc:
             return True
         return False
 
+
 def add_to_dict(dic_obj, name, weight, dependencies, cl):
     if name in dic_obj:
         return dic_obj[name]
     if dependencies is None:
-            new_obj = disc(name, weight, None)
+        new_obj = disc(name, weight, None)
     else:
         lst_dep = []
         for x in dependencies:
@@ -80,7 +90,6 @@ def add_to_dict(dic_obj, name, weight, dependencies, cl):
         new_obj = disc(name, weight, lst_dep)
     dic_obj[name] = new_obj
     return new_obj
-
 
 
 def part_two(list_str):
@@ -101,6 +110,7 @@ def part_two(list_str):
         diff = normal_weight - faulty.total_weight()
         return faulty.weight + diff
 
+
 def test_two():
     input_test = [
         "pbga (66)",
@@ -115,13 +125,13 @@ def test_two():
         "jptl (61)",
         "ugml (68) -> gyxo, ebii, jptl",
         "gyxo (61)",
-        "cntj (57)"
+        "cntj (57)",
     ]
     assert part_two(input_test) == 60
 
 
 def get_result():
-    inp = input_list_string("year2017/day07/input.txt")
+    inp = input_list_string("2017", "07")
     test_one()
     print("Part one", part_one(inp))
     test_two()

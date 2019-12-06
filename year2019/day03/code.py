@@ -75,7 +75,7 @@ def test_two():
 
 
 def get_result():
-    inp = input_list_string("year2019/day03/input.txt")
+    inp = input_list_string("2019", "03")
     test_one()
     print("Part one", part_one(inp))
     test_two()

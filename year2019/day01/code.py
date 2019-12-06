@@ -36,7 +36,7 @@ def test_two():
 
 
 def get_result():
-    inp = input_list_integer("year2019/day01/input.txt")
+    inp = input_list_integer("2019", "01")
     # part one
     test_one()
     print("Part one", part_one(inp))

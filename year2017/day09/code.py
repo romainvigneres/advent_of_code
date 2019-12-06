@@ -1,5 +1,6 @@
 from common import input_list_string
 
+
 def part_one(inp_str):
     total_score = 0
     dep = 0
@@ -23,6 +24,7 @@ def part_one(inp_str):
                 in_garb = True
     return total_score
 
+
 def test_one():
     assert part_one("{}") == 1
     assert part_one("{{{}}}") == 6
@@ -32,6 +34,7 @@ def test_one():
     assert part_one("{{<ab>},{<ab>},{<ab>},{<ab>}}") == 9
     assert part_one("{{<!!>},{<!!>},{<!!>},{<!!>}}") == 9
     assert part_one("{{<a!>},{<a!>},{<a!>},{<ab>}}") == 3
+
 
 def part_two(inp_str):
     garbage_total_score = 0
@@ -57,14 +60,16 @@ def part_two(inp_str):
                 in_garb = True
     return garbage_total_score
 
+
 def test_two():
     assert part_two("<>") == 0
     assert part_two("<random characters>") == 17
     assert part_two("<<<<>") == 3
     assert part_two("""<{o"i!a,<{i<a>""") == 10
 
+
 def get_result():
-    inp = input_list_string("year2017/day09/input.txt")[0]
+    inp = input_list_string("2017", "09")[0]
     test_one()
     print("Part one", part_one(inp))
     test_two()

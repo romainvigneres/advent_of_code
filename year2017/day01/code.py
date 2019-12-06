@@ -48,7 +48,7 @@ def test_two():
 
 def get_result():
     test_one()
-    day_input = input_list_string("year2017/day01/input.txt")[0]
+    day_input = input_list_string("2017", "01")[0]
     print("Part one", part_one(day_input))
     test_two()
     print("Part two", part_two(day_input))
