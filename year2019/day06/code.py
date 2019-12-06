@@ -1,23 +1,14 @@
-import networkx
+import networkx as nx
 
 from common import input_list_string
 
 
 def read_edgelist(inp_lst, delimiter):
-    G = networkx.Graph()
-    for line in inp_lst:
-        u, v = line.split(delimiter)
-        G.add_edge(u, v)
-    return G
+    return nx.Graph([line.split(delimiter) for line in inp_lst])
 
 
-def part_one(input_list):
-    graph = read_edgelist(input_list, ")")
-    orbits = 0
-    for node in list(graph.nodes):
-        if node != "COM":
-            orbits += len(networkx.shortest_path(graph, source=node, target="COM")) - 1
-    return orbits
+def part_one(graph):
+    return sum([nx.shortest_path_length(graph, node, "COM") for node in graph.nodes])
 
 
 def test_one():
@@ -34,12 +25,12 @@ def test_one():
         "J)K",
         "K)L",
     ]
-    assert part_one(input_test) == 42
+    g = read_edgelist(input_test, ")")
+    assert part_one(g) == 42
 
 
-def part_two(input_list):
-    graph = read_edgelist(input_list, ")")
-    return len(networkx.shortest_path(graph, source="YOU", target="SAN")) - 3
+def part_two(graph):
+    return nx.shortest_path_length(graph, source="YOU", target="SAN") - 2
 
 
 def test_two():
@@ -58,12 +49,14 @@ def test_two():
         "K)YOU",
         "I)SAN",
     ]
-    assert part_two(input_test) == 4
+    g = read_edgelist(input_test, ")")
+    assert part_two(g) == 4
 
 
 def get_result():
     inp = input_list_string("year2019/day06/input.txt")
+    graph = read_edgelist(inp, ")")
     test_one()
-    print("Part one", part_one(inp))
+    print("Part one", part_one(graph))
     test_two()
-    print("Part two", part_two(inp))
+    print("Part two", part_two(graph))
