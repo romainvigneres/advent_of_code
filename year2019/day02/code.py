@@ -1,21 +1,5 @@
 from common import input_list_string
-
-
-def intcode_computer(program_int):
-    x = 0
-    while x < len(program_int) - 3:
-        opcode = program_int[x]
-        a = program_int[program_int[x + 1]]
-        b = program_int[program_int[x + 2]]
-        pos = program_int[x + 3]
-        x += 4
-        if opcode == 1:
-            program_int[pos] = a + b
-        elif opcode == 2:
-            program_int[pos] = a * b
-        elif opcode == 99:
-            break
-    return program_int[0]
+from year2019.intcode import intcode_computer_v0 as intcode_computer
 
 
 def test_one():
@@ -27,20 +11,12 @@ def test_one():
 def get_result():
     inp = input_list_string("2019", "02")
     program = [int(x) for x in inp[0].split(",")]
-    program2 = program.copy()
-    # part one
     test_one()
-    program[1] = 12
-    program[2] = 2
-    print("Part one", intcode_computer(program))
-    # part2
+    print("Part one", intcode_computer(program, [12, 2]))
     exit = False
     for noun in range(0, 100):
         for verb in range(0, 100):
-            pro = program2.copy()
-            pro[1] = noun
-            pro[2] = verb
-            if intcode_computer(pro) == 19690720:
+            if intcode_computer(program, [noun, verb]) == 19690720:
                 print("Part two", 100 * noun + verb)
                 exit = True
                 break
