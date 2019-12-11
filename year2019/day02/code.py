@@ -1,4 +1,4 @@
-from common import input_list_string
+from common import input_integer_sep
 from year2019.intcode import intcode_computer_v0 as intcode_computer
 
 
@@ -9,8 +9,7 @@ def test_one():
 
 
 def get_result():
-    inp = input_list_string("2019", "02")
-    program = [int(x) for x in inp[0].split(",")]
+    program = input_integer_sep("2019", "02")
     test_one()
     print("Part one", intcode_computer(program, [12, 2]))
     exit = False
