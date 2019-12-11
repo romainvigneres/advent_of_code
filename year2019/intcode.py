@@ -154,6 +154,7 @@ class Program:
             else:
                 raise Exception("Invalid opcode")
 
+
 # day 09
 
 
@@ -274,3 +275,81 @@ class VM:
                 raise Exception(f"Unimplemented opcode: {op}")
 
         return out
+
+# day 11
+
+class Robot:
+    def __init__(self, program, init_input, init_ip=0):
+        self.p = program[:]
+        self.i = init_input
+        self.o = None  # output
+        self.j = init_ip  # ip
+        self.b = 0  # base for mode 2 addressing
+
+    def write(self, addr, value):
+        if addr >= len(self.p):
+            self.p += [0] * (addr - len(self.p) + 10)  # add what's needed + some more
+        self.p[addr] = value
+
+    def read(self, addr):
+        return addr < len(self.p) and self.p[addr] or 0  # 0 if missing addr
+
+    def address(self, addr, mode):  # get address for 3rd operand
+        if mode == 1:
+            return addr
+        elif mode == 2:
+            return self.b + self.read(addr)
+        else:
+            return self.read(addr)
+
+    def value(self, addr, mode):
+        return self.read(self.address(addr, mode))
+
+    def run(self):
+        while self.read(self.j) % 100 != 99:  # run till halt
+            ip = self.j
+            oop = self.read(ip)
+            op = oop % 100  # original and effective opcode
+            self.j += (0, 4, 4, 2, 2, 3, 3, 4, 4, 2)[op]
+            if op in (1, 2, 4, 5, 6, 7, 8, 9):
+                v = self.value(ip + 1, (oop // 100) % 10)
+            if op in (1, 2, 5, 6, 7, 8):
+                w = self.value(ip + 2, (oop // 1000) % 10)
+            if op in (1, 2, 7, 8):
+                dest = self.address(ip + 3, (oop // 10000) % 10)
+            if op == 1:
+                self.write(dest, v + w)  # add
+            elif op == 2:
+                self.write(dest, v * w)  # mul
+            elif op == 7:
+                self.write(dest, int(v < w))  # setl
+            elif op == 8:
+                self.write(dest, int(v == w))  # sete
+            elif op == 9:
+                self.b += v  # rebase
+            elif op == 4:
+                self.o = v
+                self.s = "O"
+                return v  # O: yielded output
+            elif op == 3:  # in
+                if len(self.i) == 0:
+                    self.j -= 2
+                    self.s = "W"
+                    return  # W: waiting input
+                self.write(self.address(ip + 1, (oop // 100) % 10), self.i[0])
+                self.i = self.i[1:]
+            elif op == 5:  # jmpt
+                if v != 0:
+                    self.j = w
+            elif op == 6:  # jmpf
+                if v == 0:
+                    self.j = w
+            else:
+                raise Exception("wrong opcode %d, %d at %d" % (op, oop, ip))
+        self.s = "H"  # H: halt instruction
+
+    def resume(self, data=None):  # resume after waiting input
+        if data is not None:
+            self.i.append(data)
+        self.run()
+
