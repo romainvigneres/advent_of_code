@@ -7,7 +7,8 @@
 # from year2015.day06.code import get_result as y15d06
 
 # from year2015.day08.code import get_result as y15d08
-from year2015.day09.code import get_result as y15d09
+# from year2015.day09.code import get_result as y15d09
+from year2015.day10.code import get_result as y15d10
 
 # 2017
 # from year2017.day01.code import get_result as y17d01
@@ -54,7 +55,8 @@ from year2015.day09.code import get_result as y15d09
 # y15d06()
 
 # y15d08()
-y15d09()
+# y15d09()
+y15d10()
 
 # y17d01()
 # y17d02()
