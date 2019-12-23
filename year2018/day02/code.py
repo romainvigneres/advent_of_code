@@ -1,24 +1,15 @@
 from common import input_list_string
+from collections import Counter
 
 
 def part_one(str_lst):
     double = 0
     triple = 0
-    for x in str_lst:
-        ls = list(x)
-        ls_set = set(ls)
-        d = False
-        t = False
-        for letter in ls_set:
-            if ls.count(letter) == 2:
-                d = True
-            elif ls.count(letter) == 3:
-                t = True
-            if d and t:
-                break
-        if d:
+    for word in str_lst:
+        ct = Counter(word).values()
+        if 2 in ct:
             double += 1
-        if t:
+        if 3 in ct:
             triple += 1
     return double * triple
 
