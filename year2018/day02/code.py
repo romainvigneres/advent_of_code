@@ -44,12 +44,15 @@ def part_two(inp_lst):
             diff = 0
             word_c = ""
             for chars in zip(list(word_a), list(word_b)):
-                d = len(set(chars)) - 1
-                if d == 0:
+                if chars[0] == chars[1]:
                     word_c += chars[0]
-                diff += d
+                    diff += 0
+                else:
+                    diff +=1
+
                 if diff > 1:
                     break
+                
             if diff == 1:
                 return word_c
 
