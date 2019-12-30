@@ -47,6 +47,7 @@ from year2018.day03.code import get_result as y18d03
 # from year2019.day18.code import get_result as y19d18
 # from year2019.day19.code import get_result as y19d19
 # from year2019.day20.code import get_result as y19d20
+from year2019.day21.code import get_result as y19d21
 
 
 # y15d01()
@@ -72,7 +73,7 @@ from year2018.day03.code import get_result as y18d03
 
 # y18d01()
 # y18d02()
-y18d03()
+# y18d03()
 
 # y19d01()
 # y19d02()
@@ -94,3 +95,4 @@ y18d03()
 # y19d18()
 # y19d19()
 # y19d20()
+y19d21()
