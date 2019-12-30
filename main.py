@@ -5,10 +5,10 @@
 # from year2015.day04.code import get_result as y15d04
 # from year2015.day05.code import get_result as y15d05
 # from year2015.day06.code import get_result as y15d06
-
+from year2015.day07.code import get_result as y15d07
 # from year2015.day08.code import get_result as y15d08
 # from year2015.day09.code import get_result as y15d09
-from year2015.day10.code import get_result as y15d10
+# from year2015.day10.code import get_result as y15d10
 
 # 2017
 # from year2017.day01.code import get_result as y17d01
@@ -24,7 +24,7 @@ from year2015.day10.code import get_result as y15d10
 # 2018
 # from year2018.day01.code import get_result as y18d01
 # from year2018.day02.code import get_result as y18d02
-from year2018.day03.code import get_result as y18d03
+# from year2018.day03.code import get_result as y18d03
 
 # 2019
 # from year2019.day01.code import get_result as y19d01
@@ -48,7 +48,7 @@ from year2018.day03.code import get_result as y18d03
 # from year2019.day19.code import get_result as y19d19
 # from year2019.day20.code import get_result as y19d20
 # from year2019.day21.code import get_result as y19d21
-from year2019.day22.code2 import get_result as y19d22
+# from year2019.day22.code2 import get_result as y19d22
 
 
 # y15d01()
@@ -57,7 +57,7 @@ from year2019.day22.code2 import get_result as y19d22
 # y15d04()
 # y15d05()
 # y15d06()
-
+y15d07()
 # y15d08()
 # y15d09()
 # y15d10()
@@ -97,4 +97,4 @@ from year2019.day22.code2 import get_result as y19d22
 # y19d19()
 # y19d20()
 # y19d21()
-y19d22()
+# y19d22()
